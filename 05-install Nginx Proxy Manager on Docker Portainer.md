@@ -73,4 +73,3 @@
    - Edit the desired host in NPM and apply the access list rule.
 
 
-**To create the .md file, please copy and paste this content into a text editor and save it with th
