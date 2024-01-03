@@ -6,7 +6,6 @@
 
 Docker is an incredible software that simplifies the installation of various software with just a few clicks. In this guide, I'll explain how to install Docker on a VPS. I'm utilizing the Oracle Cloud VPS server, which is free forever. Follow these steps to install Docker on your VPS. Once Docker is installed, you can set up WordPress with just one click.
 
-## Subheadings
 
 ### Connect the VPS server
 
@@ -15,22 +14,25 @@ Use the following commands step by step:
 ```bash
 sudo apt update
 sudo apt upgrade
+```
 
 ### Create swap memory on the VPS (optional):
 
-bash
+```bash
 
 free -m
 sudo su
 sudo dd if=/dev/zero of=/mnt/swap.0 bs=5024 count=1048576 && sudo mkswap /mnt/swap.0 && echo "/mnt/swap.0 swap swap defaults 0 0" >> /etc/fstab && swapon /mnt/swap.0 && sudo swapon -s
+```
 
 ### Remove the old version of Docker if any:
 
-bash
+```bash
 
 sudo apt-get remove docker docker-engine docker.io containerd runc
 sudo apt-get update
 sudo apt-get upgrade
+```
 
 ### To install Docker on Ubuntu VPS
 
