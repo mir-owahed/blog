@@ -36,7 +36,7 @@ sudo apt-get upgrade
 
 ### To install Docker on Ubuntu VPS
 
-bash
+```bash
 
 sudo apt-get install \
     ca-certificates \
@@ -63,16 +63,17 @@ sudo usermod -aG docker ubuntu [ubuntu is name of the user of VPS server]
 logout
 
 docker status
+```
+### Uninstall Docker
 
-Uninstall Docker
-
-bash
+```bash
 
 sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo rm -rf /var/lib/docker
 sudo rm -rf /var/lib/containerd
+```
+[Ref: docker](https://www.docker.com/)
 
-Ref: Docker
 
-After installing Docker, you can install Portainer. It is a GUI for docker containers. If you install Portainer on Docker, follow this tutorial How to Install Portainer on Docker.
-Conclusion
+After installing Docker, you can install Portainer. It is a GUI for Docker containers. If you install Portainer on Docker, follow this tutorial [How to install Portainer on Docker](tutorial_link_here).
+
