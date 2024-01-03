@@ -18,237 +18,71 @@
 ### Docker Compose configurations:
 
 For non-ARM servers:
-YAML
-
-version:
- 
-"3.9"
-
+version: "3.9"
 
 services:
-
-  
-db:
-
-    
-image:
- 
-mysql:5.7
-
-    
-volumes:
-
-      
--
- 
-db_data:/var/lib/mysql
-
-    
-restart:
- 
-always
-
-    
-environment:
-
-      
-MYSQL_ROOT_PASSWORD:
- 
-somewordpress
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
       MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
 
-      
-MYSQL_USER:
- 
-wordpress
-
-      
-MYSQL_PASSWORD:
- 
-wordpress
-
-
-  
-wordpress:
-
-    
-depends_on:
-
-      
--
- 
-db
-
-    
-image:
- 
-wordpress:latest
-
-    
-volumes:
-
-      
--
- 
-wordpress_data:/var/www/html
-
-    
-ports:
-
-      
--
- 
-"8000:80"
-
-    
-restart:
- 
-always
-
-    
-environment:
-
-      
-WORDPRESS_DB_HOST:
- 
-db
-
-      
-WORDPRESS_DB_USER:
- 
-wordpress
-
-      
-WORDPRESS_DB_PASSWORD:
- 
-wordpress
-
-      
-WORDPRESS_DB_NAME:
- 
-wordpress
-
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - wordpress_data:/var/www/html
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
 
 volumes:
-
-  
-db_data: {}
+  db_data: {}
   wordpress_data: {}
-
-Use code with caution. Learn more
-
-For ARM servers:
-YAML
-
+### For ARM servers:
 version: "3.9"
 
 services:
   db:
     image: lscr.io/linuxserver/mariadb
     volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
 
-      
--
- 
-db_data:/var/lib/mysql
-
-    
-restart:
- 
-always
-
-    
-environment:
-
-      
-MYSQL_ROOT_PASSWORD:
- 
-somewordpress
-
-      
-MYSQL_DATABASE:
- 
-wordpress
-
-      
-MYSQL_USER:
- 
-wordpress
-
-      
-MYSQL_PASSWORD:
- 
-wordpress
-
-
-  
-wordpress:
-
-    
-depends_on:
-
-      
--
- 
-db
-
-    
-image:
- 
-wordpress:latest
-
-    
-volumes:
-
-      
--
- 
-wordpress_data:/var/www/html
-
-    
-ports:
-
-      
--
- 
-"8000:80"
-
-    
-restart:
- 
-always
-
-    
-environment:
-
-      
-WORDPRESS_DB_HOST:
- 
-db
-
-      
-WORDPRESS_DB_USER:
- 
-wordpress
-
-      
-WORDPRESS_DB_PASSWORD:
- 
-wordpress
-
-      
-WORDPRESS_DB_NAME:
- 
-wordpress
-
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - wordpress_data:/var/www/html
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
 
 volumes:
-
-  
-db_data: {}
+  db_data: {}
   wordpress_data: {}
-
-Use code with caution. Learn more
 
 ### Deployment and configuration:
 
